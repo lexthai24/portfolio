@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bg text-ink antialiased;
+  /* One quiet vignette at the top. No grids, no glows. */
+  background-image: radial-gradient(
+    70rem 30rem at 50% -12rem,
+    rgba(217, 166, 72, 0.05),
+    transparent 65%
+  );
+  background-repeat: no-repeat;
+}
+
+::selection {
+  background: rgba(217, 166, 72, 0.28);
+}
+
+/* Understated underline links */
+.u-link {
+  @apply text-ink transition-colors;
+  text-decoration: underline;
+  text-decoration-color: theme("colors.line.strong");
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.u-link:hover {
+  @apply text-accent-bright;
+  text-decoration-color: currentColor;
+}
+
+/* Thin neutral scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #131110;
+}
+::-webkit-scrollbar-thumb {
+  background: #282320;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b342e;
+}
