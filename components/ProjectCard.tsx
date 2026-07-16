@@ -50,9 +50,11 @@ export default function ProjectCard({ p }: { p: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Open ${p.title} live site`}
-              className="mt-6 block transition-opacity hover:opacity-85"
+              className="group/img mt-6 block overflow-hidden rounded-lg transition-opacity hover:opacity-95"
             >
-              {img}
+              <div className="transition-transform duration-500 group-hover/img:scale-[1.015]">
+                {img}
+              </div>
             </a>
           ) : (
             <div className="mt-6">{img}</div>
@@ -62,10 +64,11 @@ export default function ProjectCard({ p }: { p: Project }) {
       <div className="mt-7 space-y-6">
         {SECTIONS.map(([label, key]) => (
           <div key={key}>
-            <p className="font-mono text-[11px] uppercase tracking-wider text-ink-dim">
+            <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-ink-dim">
+              <span className="h-px w-3 bg-accent/50" />
               {label}
             </p>
-            <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-ink-soft">
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-soft">
               {p[key]}
             </p>
           </div>
@@ -74,7 +77,8 @@ export default function ProjectCard({ p }: { p: Project }) {
 
       {p.challenges && p.challenges.length > 0 && (
         <div className="mt-7">
-          <p className="font-mono text-[11px] uppercase tracking-wider text-ink-dim">
+          <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-ink-dim">
+            <span className="h-px w-3 bg-accent/50" />
             The interesting parts
           </p>
           <ul className="mt-2.5 max-w-xl space-y-2.5">

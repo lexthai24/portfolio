@@ -19,10 +19,36 @@ body {
     transparent 65%
   );
   background-repeat: no-repeat;
+  /* Headings are set tight; keep body relaxed for reading. */
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
 
 ::selection {
   background: rgba(217, 166, 72, 0.28);
+}
+
+/* Consistent, visible keyboard focus in the warm palette. */
+:focus-visible {
+  outline: 2px solid theme("colors.accent.DEFAULT");
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Understated underline links */
