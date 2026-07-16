@@ -128,6 +128,21 @@ export function DeleteButton() {
   );
 }
 
+export function PageHeader({
+  title,
+  subtitle,
+}: {
+  title: string;
+  subtitle?: string;
+}) {
+  return (
+    <div className="mb-6">
+      <h1 className="text-xl font-semibold text-neutral-100">{title}</h1>
+      {subtitle && <p className="mt-1 text-sm text-neutral-500">{subtitle}</p>}
+    </div>
+  );
+}
+
 export function Card({ children }: { children: ReactNode }) {
   return (
     <div className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-5">

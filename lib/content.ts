@@ -22,6 +22,7 @@ export type Project = {
   stack: string[];
   status?: string;
   demo?: string;
+  order?: number;
   image?: {
     src: string;
     alt: string;
@@ -130,6 +131,7 @@ export async function getProjects(): Promise<Project[]> {
     stack: asStrings(r.stack),
     status: r.status ?? undefined,
     demo: r.demo ?? undefined,
+    order: r.order,
     image: r.imageSrc
       ? {
           src: r.imageSrc,
