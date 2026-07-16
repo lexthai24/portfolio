@@ -3,21 +3,16 @@ import Reveal from "./Reveal";
 import Section from "./Section";
 import type { Project } from "@/lib/content";
 
-const FEATURED = [
-  "Enterprise Payroll & Workforce Platform",
-  "Silent-Alarm Command System for Gold Shops",
-  "AI-Assisted Crypto Futures Trading Platform",
-];
+// A project links to a live demo or an external repo.
+const hasLink = (p: Project) => Boolean(p.demo || p.link?.href);
 
 export default function FeaturedWork({ projects }: { projects: Project[] }) {
-  // Prefer the named picks; if any are missing (renamed/deleted in admin),
-  // top up from the highest-priority projects so we always show three.
-  const byTitle = new Map(projects.map((p) => [p.title, p]));
-  const picked = FEATURED.map((t) => byTitle.get(t)).filter(Boolean) as Project[];
-  const rest = projects
-    .filter((p) => !picked.includes(p))
-    .sort((a, b) => (a.priority ?? 100) - (b.priority ?? 100));
-  const featured = [...picked, ...rest].slice(0, 3);
+  // Show the ones you can actually click through to first, then the rest.
+  // `projects` already arrives sorted by `order` (managed in admin), and the
+  // sort below is stable, so `order` stays the tiebreaker within each group.
+  const featured = [...projects]
+    .sort((a, b) => Number(hasLink(b)) - Number(hasLink(a)))
+    .slice(0, 3);
 
   return (
     <Section kicker="Selected work" title="A few things I've built">
@@ -40,7 +35,7 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
                 <span className="font-mono text-ink-dim">
                   {p.stack.slice(0, 4).join(" · ")}
                 </span>
-                {p.demo && (
+                {p.demo ? (
                   <a
                     href={p.demo}
                     target="_blank"
@@ -49,6 +44,17 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
                   >
                     Live ↗
                   </a>
+                ) : (
+                  p.link && (
+                    <a
+                      href={p.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="u-link"
+                    >
+                      {p.link.label} ↗
+                    </a>
+                  )
                 )}
               </div>
             </div>
