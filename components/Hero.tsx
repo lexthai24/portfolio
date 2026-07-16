@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { profile } from "@/lib/data";
+import type { Profile } from "@/lib/content";
 
-export default function Hero() {
+export default function Hero({ profile }: { profile: Profile }) {
   return (
     <section id="top" className="mx-auto max-w-3xl px-6 pb-20 pt-40 sm:pt-48">
       <motion.div

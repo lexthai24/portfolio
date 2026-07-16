@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { profile } from "@/lib/data";
 
 const links = [
   { href: "/about", label: "About" },
@@ -11,7 +10,7 @@ const links = [
   { href: "/projects", label: "Projects" },
 ];
 
-export default function Nav() {
+export default function Nav({ name, email }: { name: string; email: string }) {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -35,7 +34,7 @@ export default function Nav() {
           href="/"
           className="font-display text-base font-semibold tracking-tight text-ink transition-colors hover:text-accent-bright"
         >
-          {profile.name}
+          {name}
         </Link>
         <ul className="flex items-center gap-7 text-sm">
           {links.map((l) => {
@@ -55,7 +54,7 @@ export default function Nav() {
           })}
           <li>
             <a
-              href={`mailto:${profile.email}`}
+              href={`mailto:${email}`}
               className="text-accent transition-colors hover:text-accent-bright"
             >
               Get in touch

@@ -1,8 +1,8 @@
 import Section from "./Section";
 import Reveal from "./Reveal";
-import { skills } from "@/lib/data";
+import type { SkillGroup } from "@/lib/content";
 
-export default function Skills() {
+export default function Skills({ skills }: { skills: SkillGroup[] }) {
   return (
     <Section id="skills" kicker="Skills" title="What I work with">
       <Reveal>

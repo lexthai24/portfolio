@@ -1,7 +1,7 @@
 import Reveal from "./Reveal";
-import { profile } from "@/lib/data";
+import type { Profile } from "@/lib/content";
 
-export default function Contact() {
+export default function Contact({ profile }: { profile: Profile }) {
   return (
     <section id="contact" className="mx-auto max-w-3xl scroll-mt-28 px-6 py-24">
       <Reveal>

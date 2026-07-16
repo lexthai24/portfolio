@@ -1,0 +1,88 @@
+// Portfolio content, stored in Postgres and edited through the admin panel.
+// Run: npx prisma migrate dev --name init   (then: npm run db:seed)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Singleton — there is only ever one profile row (id = 1).
+model Profile {
+  id            Int      @id @default(1)
+  name          String
+  handle        String
+  role          String
+  tagline       String
+  location      String
+  summary       String
+  currently     String
+  email         String
+  github        String
+  telegram      String
+  telegramHandle String
+  website       String
+  available     Boolean  @default(true)
+  updatedAt     DateTime @updatedAt
+}
+
+model SkillGroup {
+  id    Int      @id @default(autoincrement())
+  group String
+  items Json     // string[]
+  order Int      @default(0)
+}
+
+model Project {
+  id         Int      @id @default(autoincrement())
+  title      String
+  kind       String   // "Personal project" | "Client project" | "Open source"
+  nda        Boolean  @default(false)
+  year       String
+  priority   Int      @default(100)
+  tags       Json     // string[]
+  blurb      String
+  problem    String
+  approach   String
+  outcome    String
+  challenges Json     @default("[]") // string[]
+  highlights Json     @default("[]") // string[]
+  stack      Json     // string[]
+  status     String?
+  demo       String?
+  linkLabel  String?
+  linkHref   String?
+  imageSrc   String?
+  imageAlt   String?
+  imageWidth Int?
+  imageHeight Int?
+  imageFramed Boolean @default(false)
+  order      Int      @default(0)
+}
+
+model CareerEntry {
+  id       Int    @id @default(autoincrement())
+  company  String
+  role     String
+  period   String
+  location String
+  points   Json   // string[]
+  order    Int    @default(0)
+}
+
+model Education {
+  id     Int    @id @default(autoincrement())
+  school String
+  detail String
+  order  Int    @default(0)
+}
+
+model Language {
+  id    Int    @id @default(autoincrement())
+  name  String
+  level String
+  order Int    @default(0)
+}

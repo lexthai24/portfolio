@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
 import Section from "./Section";
-import { projects } from "@/lib/data";
+import type { Project } from "@/lib/content";
 
 const FEATURED = [
   "Enterprise Payroll & Workforce Platform",
@@ -9,10 +9,15 @@ const FEATURED = [
   "AI-Assisted Crypto Futures Trading Platform",
 ];
 
-export default function FeaturedWork() {
-  const featured = FEATURED.map((t) => projects.find((p) => p.title === t)!).filter(
-    Boolean,
-  );
+export default function FeaturedWork({ projects }: { projects: Project[] }) {
+  // Prefer the named picks; if any are missing (renamed/deleted in admin),
+  // top up from the highest-priority projects so we always show three.
+  const byTitle = new Map(projects.map((p) => [p.title, p]));
+  const picked = FEATURED.map((t) => byTitle.get(t)).filter(Boolean) as Project[];
+  const rest = projects
+    .filter((p) => !picked.includes(p))
+    .sort((a, b) => (a.priority ?? 100) - (b.priority ?? 100));
+  const featured = [...picked, ...rest].slice(0, 3);
 
   return (
     <Section kicker="Selected work" title="A few things I've built">

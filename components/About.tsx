@@ -1,8 +1,16 @@
 import Reveal from "./Reveal";
 import Section from "./Section";
-import { career, education, languages } from "@/lib/data";
+import type { CareerEntry, Education, Language } from "@/lib/content";
 
-export default function About() {
+export default function About({
+  career,
+  education,
+  languages,
+}: {
+  career: CareerEntry[];
+  education: Education[];
+  languages: Language[];
+}) {
   return (
     <>
       <Section kicker="About" title="Ten years of shipping things.">

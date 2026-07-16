@@ -4,23 +4,38 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import { profile } from "@/lib/data";
+import {
+  getProfile,
+  getCareer,
+  getEducation,
+  getLanguages,
+  getSkills,
+} from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: `About — ${profile.name}`,
-  description: profile.summary,
-};
+export const dynamic = "force-dynamic";
 
-export default function AboutPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await getProfile();
+  return { title: `About — ${profile.name}`, description: profile.summary };
+}
+
+export default async function AboutPage() {
+  const [profile, career, education, languages, skills] = await Promise.all([
+    getProfile(),
+    getCareer(),
+    getEducation(),
+    getLanguages(),
+    getSkills(),
+  ]);
   return (
     <>
-      <Nav />
+      <Nav name={profile.name} email={profile.email} />
       <main className="pt-24">
-        <About />
-        <Skills />
-        <Contact />
+        <About career={career} education={education} languages={languages} />
+        <Skills skills={skills} />
+        <Contact profile={profile} />
       </main>
-      <Footer />
+      <Footer profile={profile} />
     </>
   );
 }

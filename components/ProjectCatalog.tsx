@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Section from "./Section";
 import ProjectCard from "./ProjectCard";
-import { projects, type Project, type ProjectKind } from "@/lib/data";
+import type { Project, ProjectKind } from "@/lib/content";
 
 const PER_PAGE = 3;
 
@@ -115,17 +115,19 @@ export default function ProjectCatalog({
   kicker,
   title,
   intro,
+  projects,
 }: {
   kinds: ProjectKind[];
   kicker: string;
   title: string;
   intro: string;
+  projects: Project[];
 }) {
   const [filter, setFilter] = useState<string>("All");
 
   const pool = useMemo(
     () => projects.filter((p) => kinds.includes(p.kind)),
-    [kinds],
+    [kinds, projects],
   );
   const filters = useMemo(
     () => ["All", ...Array.from(new Set(pool.flatMap((p) => p.tags))).sort()],

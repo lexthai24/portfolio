@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { profile } from "@/lib/data";
+import { getProfile } from "@/lib/content";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -22,16 +22,19 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.role}`,
-  description: profile.summary,
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await getProfile();
+  return {
     title: `${profile.name} — ${profile.role}`,
-    description: profile.tagline,
-    type: "website",
-  },
-  robots: { index: true, follow: true },
-};
+    description: profile.summary,
+    openGraph: {
+      title: `${profile.name} — ${profile.role}`,
+      description: profile.tagline,
+      type: "website",
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 export default function RootLayout({
   children,

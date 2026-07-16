@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Project } from "@/lib/data";
+import type { Project } from "@/lib/content";
 
 const SECTIONS = [
   ["The problem", "problem"],
