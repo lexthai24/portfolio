@@ -1,6 +1,7 @@
 import { getProjects } from "@/lib/content";
 import { deleteProject } from "../actions";
-import { Card, PageHeader, DeleteButton } from "../ui";
+import { Card, PageHeader } from "../ui";
+import { AdminForm, DeleteSubmitButton } from "../AdminForm";
 import ProjectForm from "./ProjectForm";
 
 export const dynamic = "force-dynamic";
@@ -37,10 +38,10 @@ export default async function ProjectsAdmin() {
             </summary>
             <div className="border-t border-neutral-800 p-5">
               <ProjectForm project={p} />
-              <form action={deleteProject} className="mt-3">
+              <AdminForm action={deleteProject} className="mt-3">
                 <input type="hidden" name="id" value={p.id} />
-                <DeleteButton />
-              </form>
+                <DeleteSubmitButton />
+              </AdminForm>
             </div>
           </details>
         ))}

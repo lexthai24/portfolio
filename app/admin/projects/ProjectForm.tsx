@@ -1,6 +1,7 @@
 import type { Project } from "@/lib/content";
 import { saveProject } from "../actions";
-import { Field, Area, ListArea, Checkbox, SaveButton } from "../ui";
+import { Field, Area, ListArea, Checkbox } from "../ui";
+import { AdminForm, SubmitButton } from "../AdminForm";
 
 // Shared form for both editing an existing project and creating a new one.
 export default function ProjectForm({
@@ -12,7 +13,11 @@ export default function ProjectForm({
 }) {
   const p = project;
   return (
-    <form action={saveProject} className="grid gap-3">
+    <AdminForm
+      action={saveProject}
+      className="grid gap-3"
+      resetOnSuccess={!p}
+    >
       {p && <input type="hidden" name="id" value={p.id} />}
       <div className="grid gap-3 sm:grid-cols-2">
         <Field label="Title" name="title" defaultValue={p?.title} required />
@@ -84,8 +89,8 @@ export default function ProjectForm({
         defaultValue={p?.order ?? defaultOrder ?? 0}
       />
       <div>
-        <SaveButton>{p ? "Save project" : "Add project"}</SaveButton>
+        <SubmitButton>{p ? "Save project" : "Add project"}</SubmitButton>
       </div>
-    </form>
+    </AdminForm>
   );
 }

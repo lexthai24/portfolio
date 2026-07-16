@@ -1,6 +1,7 @@
 import { getProfile } from "@/lib/content";
 import { saveProfile } from "../actions";
-import { Field, Area, Checkbox, SaveButton, Card, PageHeader } from "../ui";
+import { Field, Area, Checkbox, Card, PageHeader } from "../ui";
+import { AdminForm, SubmitButton } from "../AdminForm";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +11,7 @@ export default async function ProfileAdmin() {
     <div>
       <PageHeader title="Profile" subtitle="Your name, headline, and contact links." />
       <Card>
-        <form action={saveProfile} className="grid gap-4 sm:grid-cols-2">
+        <AdminForm action={saveProfile} className="grid gap-4 sm:grid-cols-2">
           <Field label="Name" name="name" defaultValue={profile.name} required />
           <Field label="Handle" name="handle" defaultValue={profile.handle} />
           <Field label="Role" name="role" defaultValue={profile.role} />
@@ -29,9 +30,9 @@ export default async function ProfileAdmin() {
             <Checkbox label="Open to work" name="available" defaultChecked={profile.available} />
           </div>
           <div className="sm:col-span-2">
-            <SaveButton>Save profile</SaveButton>
+            <SubmitButton>Save profile</SubmitButton>
           </div>
-        </form>
+        </AdminForm>
       </Card>
     </div>
   );

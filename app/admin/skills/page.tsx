@@ -1,13 +1,7 @@
 import { getSkills } from "@/lib/content";
 import { saveSkillGroup, deleteSkillGroup } from "../actions";
-import {
-  Field,
-  ListArea,
-  SaveButton,
-  DeleteButton,
-  Card,
-  PageHeader,
-} from "../ui";
+import { Field, ListArea, Card, PageHeader } from "../ui";
+import { AdminForm, SubmitButton, DeleteSubmitButton } from "../AdminForm";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +16,7 @@ export default async function SkillsAdmin() {
       <div className="space-y-4">
         {skills.map((s) => (
           <Card key={s.id}>
-            <form action={saveSkillGroup} className="grid gap-3">
+            <AdminForm action={saveSkillGroup} className="grid gap-3">
               <input type="hidden" name="id" value={s.id} />
               <div className="grid gap-3 sm:grid-cols-[1fr_6rem]">
                 <Field label="Group" name="group" defaultValue={s.group} />
@@ -30,28 +24,28 @@ export default async function SkillsAdmin() {
               </div>
               <ListArea label="Items" name="items" items={s.items} />
               <div className="flex items-center gap-3">
-                <SaveButton />
+                <SubmitButton />
               </div>
-            </form>
-            <form action={deleteSkillGroup} className="mt-2">
+            </AdminForm>
+            <AdminForm action={deleteSkillGroup} className="mt-2">
               <input type="hidden" name="id" value={s.id} />
-              <DeleteButton />
-            </form>
+              <DeleteSubmitButton />
+            </AdminForm>
           </Card>
         ))}
 
         <Card>
           <p className="mb-3 text-sm font-medium text-neutral-400">Add skill group</p>
-          <form action={saveSkillGroup} className="grid gap-3">
+          <AdminForm action={saveSkillGroup} className="grid gap-3" resetOnSuccess>
             <div className="grid gap-3 sm:grid-cols-[1fr_6rem]">
               <Field label="Group" name="group" />
               <Field label="Order" name="order" type="number" defaultValue={skills.length} />
             </div>
             <ListArea label="Items" name="items" />
             <div>
-              <SaveButton>Add group</SaveButton>
+              <SubmitButton>Add group</SubmitButton>
             </div>
-          </form>
+          </AdminForm>
         </Card>
       </div>
     </div>
