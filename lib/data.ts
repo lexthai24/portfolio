@@ -109,10 +109,12 @@ export const skills: { group: string; items: string[] }[] = [
   {
     group: "Business & Delivery",
     items: [
+      "Project management",
       "Requirements & user stories",
       "Process mapping",
       "Gap analysis",
       "Stakeholder management",
+      "Vendor & bank coordination",
       "UAT",
       "Agile / Scrum",
       "JIRA / Confluence",
@@ -579,6 +581,34 @@ export const projects: Project[] = [
       "Strict TypeScript + Zod",
     ],
     stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "wagmi / viem", "jose"],
+  },
+  {
+    title: "SCB Payment Gateway Integration",
+    kind: "Client project",
+    nda: true,
+    year: "2018",
+    priority: 50,
+    tags: ["Full-stack", "Fintech", "Project management"],
+    blurb:
+      "A bill-payment integration with Siam Commercial Bank (SCB), taken end to end as a one-person outsource job: I ran the project management and the paperwork with the bank, and then built the whole thing in Node.js and React myself.",
+    problem:
+      "The client wanted to accept payments through SCB's bill-payment rails, which isn't something you just plug in. Getting there means a real onboarding process with the bank — application documents, compliance back-and-forth, and getting issued API credentials and a Biller ID before a single line of integration code is worth writing. They needed one person who could handle both the bank relationship and the actual build.",
+    approach:
+      "I owned the project from both sides. On the coordination side: prepared and submitted the onboarding documents, and worked directly with SCB to get through their approval process and obtain API access and the Biller ID. On the engineering side: built the backend in Node.js to talk to SCB's payment API — creating bills, handling the payment callbacks, and reconciling status — and the frontend in React for the client's side of the flow.",
+    outcome:
+      "A working SCB payment-gateway integration delivered solo, from the first bank document to a deployed Node.js + React application. The client could issue bills and take payments through SCB without me handing any part of it — bank liaison, backend, or frontend — to someone else.",
+    challenges: [
+      "Bank onboarding: the slowest, least code-y part. Preparing the application, satisfying SCB's requirements, and following up until the API credentials and Biller ID actually landed.",
+      "Payment API integration: wiring Node.js to SCB's bill-payment API — bill creation, payment callbacks, and status reconciliation — against a real bank's spec and sandbox.",
+      "Wearing every hat: as the only person on it, I was the project manager, the bank contact, the backend developer, and the frontend developer, which meant the coordination and the code had to stay in sync in one head.",
+    ],
+    highlights: [
+      "End-to-end solo delivery",
+      "Direct SCB bank coordination (API + Biller ID)",
+      "Node.js backend + React frontend",
+      "Bill-payment flow with callbacks & reconciliation",
+    ],
+    stack: ["Node.js", "React", "JavaScript", "REST", "SCB Payment API"],
   },
   {
     title: "EVM Chain Metadata",
