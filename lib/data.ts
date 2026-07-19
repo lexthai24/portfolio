@@ -583,30 +583,31 @@ export const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "wagmi / viem", "jose"],
   },
   {
-    title: "SCB Payment Gateway Integration",
+    title: "Payment Gateway Platform (Bank Integration)",
     kind: "Client project",
     nda: true,
     year: "2018",
     priority: 50,
-    tags: ["Full-stack", "Fintech", "Project management"],
+    tags: ["Full-stack", "Fintech", "Payments", "Project management"],
     blurb:
-      "A bill-payment integration with Siam Commercial Bank (SCB), taken end to end as a one-person outsource job: I ran the project management and the paperwork with the bank, and then built the whole thing in Node.js and React myself.",
+      "A payment-gateway platform with a bank integration to Siam Commercial Bank (SCB), delivered as a one-person outsource job. I ran the whole thing myself, from design and development through sandbox testing, the bank paperwork, UAT, and go-live — with the phases moving in parallel rather than one neat step after another.",
     problem:
-      "The client wanted to accept payments through SCB's bill-payment rails, which isn't something you just plug in. Getting there means a real onboarding process with the bank — application documents, compliance back-and-forth, and getting issued API credentials and a Biller ID before a single line of integration code is worth writing. They needed one person who could handle both the bank relationship and the actual build.",
+      "The client needed a platform that could actually take payments, which meant integrating with a bank's rails end to end. That's two hard problems at once: building a reliable gateway, and getting through a real bank's onboarding — application documents, sandbox certification, and UAT sign-off — before anything can go live. And these tracks don't run sequentially; the paperwork and the bank's testing gates land while you're still building, so they have to be managed together.",
     approach:
-      "I owned the project from both sides. On the coordination side: prepared and submitted the onboarding documents, and worked directly with SCB to get through their approval process and obtain API access and the Biller ID. On the engineering side: built the backend in Node.js to talk to SCB's payment API — creating bills, handling the payment callbacks, and reconciling status — and the frontend in React for the client's side of the flow.",
+      "I owned the full lifecycle solo and ran the tracks concurrently. Design and development on the platform itself; integration and testing against SCB's sandbox; the onboarding paperwork with the bank in parallel with the build; then UAT with the client and the bank before go-live. Backend in Node.js talking to the SCB API — payment flows, callbacks, and reconciliation — and the frontend in React.",
     outcome:
-      "A working SCB payment-gateway integration delivered solo, from the first bank document to a deployed Node.js + React application. The client could issue bills and take payments through SCB without me handing any part of it — bank liaison, backend, or frontend — to someone else.",
+      "A live payment-gateway platform integrated with SCB, taken from a blank design to production single-handedly: the platform, the bank integration, the sandbox and UAT gates, and the paperwork. No part of it — architecture, code, bank liaison, or testing — was handed to anyone else.",
     challenges: [
-      "Bank onboarding: the slowest, least code-y part. Preparing the application, satisfying SCB's requirements, and following up until the API credentials and Biller ID actually landed.",
-      "Payment API integration: wiring Node.js to SCB's bill-payment API — bill creation, payment callbacks, and status reconciliation — against a real bank's spec and sandbox.",
-      "Wearing every hat: as the only person on it, I was the project manager, the bank contact, the backend developer, and the frontend developer, which meant the coordination and the code had to stay in sync in one head.",
+      "Banking integration: building the gateway against SCB's payment API — payment flows, callbacks, and reconciliation — and getting it through the bank's sandbox certification.",
+      "Parallel delivery: design, development, sandbox testing, paperwork, and UAT didn't run in a tidy line. The bank's document and testing gates arrived mid-build, so I had to keep all of them moving at once without one blocking the others.",
+      "Bank onboarding: preparing and submitting the application, satisfying SCB's requirements, and following it through UAT to go-live approval.",
+      "Wearing every hat: as the only person on it, I was the architect, backend and frontend developer, tester, and the bank's point of contact — the plan and the code had to stay in sync in one head.",
     ],
     highlights: [
-      "End-to-end solo delivery",
-      "Direct SCB bank coordination (API + Biller ID)",
+      "Full lifecycle solo: design → dev → sandbox → UAT → live",
+      "SCB banking integration (sandbox + production)",
       "Node.js backend + React frontend",
-      "Bill-payment flow with callbacks & reconciliation",
+      "Parallel tracks: build, paperwork, and testing at once",
     ],
     stack: ["Node.js", "React", "JavaScript", "REST", "SCB Payment API"],
   },
