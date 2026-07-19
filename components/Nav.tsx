@@ -12,6 +12,7 @@ const links = [
 
 export default function Nav({ name, email }: { name: string; email: string }) {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -21,10 +22,30 @@ export default function Nav({ name, email }: { name: string; email: string }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // While the menu is open: lock body scroll and allow Escape to close.
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || open
           ? "border-b border-line bg-bg/85 backdrop-blur-md"
           : "border-b border-transparent"
       }`}
@@ -36,7 +57,9 @@ export default function Nav({ name, email }: { name: string; email: string }) {
         >
           {name}
         </Link>
-        <ul className="flex items-center gap-7 text-sm">
+
+        {/* Desktop links */}
+        <ul className="hidden items-center gap-7 text-sm sm:flex">
           {links.map((l) => {
             const active = pathname === l.href;
             return (
@@ -61,7 +84,80 @@ export default function Nav({ name, email }: { name: string; email: string }) {
             </a>
           </li>
         </ul>
+
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          className="relative z-50 -mr-2 flex h-10 w-10 items-center justify-center sm:hidden"
+        >
+          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+          <span className="relative block h-3.5 w-6">
+            <span
+              className={`absolute left-0 block h-0.5 w-6 bg-ink transition-all duration-300 ${
+                open ? "top-1.5 rotate-45" : "top-0"
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-1.5 block h-0.5 w-6 bg-ink transition-all duration-300 ${
+                open ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute left-0 block h-0.5 w-6 bg-ink transition-all duration-300 ${
+                open ? "top-1.5 -rotate-45" : "top-3"
+              }`}
+            />
+          </span>
+        </button>
       </nav>
+
+      {/* Mobile menu — rendered only when open (no stuck opacity states) */}
+      {open && (
+        <div id="mobile-menu" className="sm:hidden">
+          {/* Backdrop */}
+          <button
+            type="button"
+            aria-hidden="true"
+            tabIndex={-1}
+            onClick={() => setOpen(false)}
+            className="fixed inset-x-0 bottom-0 top-[4.5rem] bg-bg/70 backdrop-blur-sm"
+          />
+          {/* Sheet */}
+          <div className="fixed inset-x-0 top-[4.5rem] border-b border-line bg-bg shadow-xl shadow-black/20">
+            <ul className="flex flex-col gap-1 px-6 pb-6 pt-2 text-base">
+              {links.map((l) => {
+                const active = pathname === l.href;
+                return (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className={`block py-2.5 transition-colors ${
+                        active ? "text-accent" : "text-ink-soft hover:text-ink"
+                      }`}
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                );
+              })}
+              <li className="mt-2 border-t border-line pt-3">
+                <a
+                  href={`mailto:${email}`}
+                  onClick={() => setOpen(false)}
+                  className="block py-1 text-accent transition-colors hover:text-accent-bright"
+                >
+                  Get in touch
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
