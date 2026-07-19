@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 const links = [
   { href: "/about", label: "About" },
@@ -115,49 +116,81 @@ export default function Nav({ name, email }: { name: string; email: string }) {
         </button>
       </nav>
 
-      {/* Mobile menu — rendered only when open (no stuck opacity states) */}
-      {open && (
-        <div id="mobile-menu" className="sm:hidden">
-          {/* Backdrop */}
-          <button
-            type="button"
-            aria-hidden="true"
-            tabIndex={-1}
-            onClick={() => setOpen(false)}
-            className="fixed inset-x-0 bottom-0 top-[4.5rem] bg-bg/70 backdrop-blur-sm"
-          />
-          {/* Sheet */}
-          <div className="fixed inset-x-0 top-[4.5rem] border-b border-line bg-bg shadow-xl shadow-black/20">
-            <ul className="flex flex-col gap-1 px-6 pb-6 pt-2 text-base">
-              {links.map((l) => {
-                const active = pathname === l.href;
-                return (
-                  <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className={`block py-2.5 transition-colors ${
-                        active ? "text-accent" : "text-ink-soft hover:text-ink"
-                      }`}
+      {/* Mobile menu — framer-motion handles enter/exit */}
+      <AnimatePresence>
+        {open && (
+          <div id="mobile-menu" className="sm:hidden">
+            {/* Backdrop */}
+            <motion.button
+              type="button"
+              aria-hidden="true"
+              tabIndex={-1}
+              onClick={() => setOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="fixed inset-x-0 bottom-0 top-[4.5rem] bg-bg/70 backdrop-blur-sm"
+            />
+            {/* Sheet */}
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="fixed inset-x-0 top-[4.5rem] border-b border-line bg-bg shadow-xl shadow-black/20"
+            >
+              <motion.ul
+                initial="hidden"
+                animate="show"
+                variants={{
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.05, delayChildren: 0.06 } },
+                }}
+                className="flex flex-col gap-1 px-6 pb-6 pt-2 text-base"
+              >
+                {links.map((l) => {
+                  const active = pathname === l.href;
+                  return (
+                    <motion.li
+                      key={l.href}
+                      variants={{
+                        hidden: { opacity: 0, x: -8 },
+                        show: { opacity: 1, x: 0 },
+                      }}
                     >
-                      {l.label}
-                    </Link>
-                  </li>
-                );
-              })}
-              <li className="mt-2 border-t border-line pt-3">
-                <a
-                  href={`mailto:${email}`}
-                  onClick={() => setOpen(false)}
-                  className="block py-1 text-accent transition-colors hover:text-accent-bright"
+                      <Link
+                        href={l.href}
+                        onClick={() => setOpen(false)}
+                        className={`block py-2.5 transition-colors ${
+                          active ? "text-accent" : "text-ink-soft hover:text-ink"
+                        }`}
+                      >
+                        {l.label}
+                      </Link>
+                    </motion.li>
+                  );
+                })}
+                <motion.li
+                  variants={{
+                    hidden: { opacity: 0, x: -8 },
+                    show: { opacity: 1, x: 0 },
+                  }}
+                  className="mt-2 border-t border-line pt-3"
                 >
-                  Get in touch
-                </a>
-              </li>
-            </ul>
+                  <a
+                    href={`mailto:${email}`}
+                    onClick={() => setOpen(false)}
+                    className="block py-1 text-accent transition-colors hover:text-accent-bright"
+                  >
+                    Get in touch
+                  </a>
+                </motion.li>
+              </motion.ul>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </header>
   );
 }

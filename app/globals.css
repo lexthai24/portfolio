@@ -41,13 +41,17 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
+  html {
+    scroll-behavior: auto;
+  }
+  /* Turn off our own CSS keyframe/transition motion, but scope it to
+     elements that use them — NOT a blanket `*` rule. A global
+     `transition-duration: 0 !important` also freezes Framer Motion's
+     JS-driven animations at their opening keyframe (e.g. opacity: 0),
+     making content vanish instead of appearing. */
+  .animate-fade-up {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }
 
