@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
 import Section from "./Section";
+import { TechBadges } from "./TechBadge";
 import type { Project } from "@/lib/content";
 
 // A project links to a live demo or an external repo.
@@ -36,10 +37,8 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
                 <p className="max-w-xl text-sm leading-relaxed text-ink-soft">
                   {p.blurb}
                 </p>
-                <div className="mt-1 flex flex-wrap items-center gap-4 text-xs">
-                  <span className="font-mono text-ink-dim">
-                    {p.stack.slice(0, 4).join(" · ")}
-                  </span>
+                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
+                  <TechBadges items={p.stack.slice(0, 4)} />
                   {href && (
                     <a
                       href={href}

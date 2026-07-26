@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Project } from "@/lib/content";
+import { TechBadges } from "./TechBadge";
 
 const SECTIONS = [
   ["The problem", "problem"],
@@ -108,9 +109,12 @@ export default function ProjectCard({ p }: { p: Project }) {
         </div>
       )}
 
-      <div className="mt-7 flex flex-wrap items-center justify-between gap-4 text-xs">
-        <p className="font-mono text-ink-dim">{p.stack.join(" · ")}</p>
-        <div className="flex items-center gap-4">
+      <div className="mt-7">
+        <TechBadges items={p.stack} />
+      </div>
+
+      {(p.demo || p.link) && (
+        <div className="mt-5 flex flex-wrap items-center gap-4 text-xs">
           {p.demo && (
             <a
               href={p.demo}
@@ -132,7 +136,7 @@ export default function ProjectCard({ p }: { p: Project }) {
             </a>
           )}
         </div>
-      </div>
+      )}
     </article>
   );
 }
