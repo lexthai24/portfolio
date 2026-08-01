@@ -39,6 +39,7 @@ const ICON_SLUG: Record<string, string> = {
   FCM: "siFirebase",
   "Ledger / Trezor": "siTrezor",
   "Deepseek API": "siDeepseek",
+  Vitest: "siVitest",
 };
 
 function iconFor(label: string): Icon | null {
