@@ -22,7 +22,6 @@ const KIND_META: Record<ProjectKind, { label: string; note: string }> = {
   },
 };
 
-/** One kind-group with its own local pagination. */
 function ProjectGroup({
   kind,
   items,
@@ -40,7 +39,7 @@ function ProjectGroup({
   const visible = items.slice(current * PER_PAGE, current * PER_PAGE + PER_PAGE);
 
   return (
-    <div className="mb-20 last:mb-0">
+    <div className="mb-16 last:mb-0">
       {showHeader && (
         <div className="mb-8">
           <h3 className="font-display text-lg font-semibold tracking-tight text-accent">
@@ -54,8 +53,7 @@ function ProjectGroup({
         </div>
       )}
 
-      {/* Cards — keyed by page so the set swaps cleanly */}
-      <div key={current} className="divide-y divide-line border-t border-line pt-2">
+      <div key={current} className="space-y-4">
         {visible.map((p, i) => (
           <div
             key={p.title}
@@ -67,7 +65,6 @@ function ProjectGroup({
         ))}
       </div>
 
-      {/* Local pagination (only when this group overflows one page) */}
       {pageCount > 1 && (
         <div className="mt-8 flex items-center justify-center gap-5 font-mono text-xs">
           <button
@@ -134,13 +131,9 @@ export default function ProjectCatalog({
     [pool],
   );
 
-  // Sort key: explicit priority first (lower = earlier), then projects with a
-  // screenshot, then original array order. Keeps the strongest, most visual
-  // work at the top of each group.
   const rank = (p: Project, index: number) =>
     (p.priority ?? 100) * 1000 + (p.image ? 0 : 100) + index;
 
-  // Group the (filtered) pool by kind, in the order given. Empty groups drop.
   const groups = useMemo(() => {
     const match = (p: Project) => filter === "All" || p.tags.includes(filter);
     return kinds
@@ -159,11 +152,10 @@ export default function ProjectCatalog({
 
   return (
     <Section kicker={kicker} title={title}>
-      <p className="mb-8 max-w-xl text-sm leading-relaxed text-ink-soft">
+      <p className="mb-8 max-w-2xl text-[15px] leading-relaxed text-ink-soft">
         {intro}
       </p>
 
-      {/* Filter bar — plain text, no pills */}
       <div className="mb-14 flex flex-wrap gap-x-5 gap-y-2 border-b border-line pb-4 text-sm">
         {filters.map((f) => {
           const active = f === filter;
@@ -184,9 +176,6 @@ export default function ProjectCatalog({
         })}
       </div>
 
-      {/* Groups — remount on filter change so per-group pages reset.
-          The first kind is the page's main subject, so its header is
-          redundant with the page title; later groups keep theirs. */}
       <div key={filter}>
         {groups.map((g) => (
           <ProjectGroup

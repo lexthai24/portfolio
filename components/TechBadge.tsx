@@ -2,8 +2,6 @@ import * as si from "simple-icons";
 
 type Icon = { title: string; path: string };
 
-// Map a stack label → a simple-icons export. Labels not listed here (REST, SSE,
-// EVM, gRPC, viem, concept-only entries) render as a text badge with a dot.
 const ICON_SLUG: Record<string, string> = {
   "Node.js": "siNodedotjs",
   "Next.js": "siNextdotjs",
@@ -52,13 +50,13 @@ function iconFor(label: string): Icon | null {
 export function TechBadge({ label }: { label: string }) {
   const icon = iconFor(label);
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-md border border-line bg-bg-soft px-2 py-1 font-mono text-[11px] text-ink-soft transition-colors hover:border-line-strong hover:text-ink">
+    <span className="inline-flex items-center gap-1.5 rounded-md border border-line bg-bg-soft px-2.5 py-1 font-mono text-[11px] text-ink-soft transition-colors hover:border-line-strong hover:text-ink">
       {icon ? (
         <svg
           role="img"
           viewBox="0 0 24 24"
           aria-hidden="true"
-          className="h-3 w-3 shrink-0 fill-current opacity-80"
+          className="h-3 w-3 shrink-0 fill-current opacity-70"
         >
           <path d={icon.path} />
         </svg>

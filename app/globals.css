@@ -12,28 +12,22 @@ html {
 
 body {
   @apply bg-bg text-ink antialiased;
-  /* One quiet vignette at the top. No grids, no glows. */
-  background-image: radial-gradient(
-    70rem 30rem at 50% -12rem,
-    rgba(217, 166, 72, 0.05),
-    transparent 65%
-  );
+  background-image:
+    radial-gradient(ellipse 80rem 40rem at 50% -20rem, rgba(99, 102, 241, 0.06), transparent 70%),
+    radial-gradient(ellipse 60rem 30rem at 80% 110%, rgba(99, 102, 241, 0.03), transparent 70%);
   background-repeat: no-repeat;
-  /* Headings are set tight; keep body relaxed for reading. */
   text-rendering: optimizeLegibility;
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   text-wrap: balance;
 }
 
 ::selection {
-  background: rgba(217, 166, 72, 0.28);
+  background: rgba(99, 102, 241, 0.25);
+  color: #e8e8f0;
 }
 
-/* Consistent, visible keyboard focus in the warm palette. */
 :focus-visible {
   outline: 2px solid theme("colors.accent.DEFAULT");
   outline-offset: 3px;
@@ -44,12 +38,8 @@ h3 {
   html {
     scroll-behavior: auto;
   }
-  /* Turn off our own CSS keyframe/transition motion, but scope it to
-     elements that use them — NOT a blanket `*` rule. A global
-     `transition-duration: 0 !important` also freezes Framer Motion's
-     JS-driven animations at their opening keyframe (e.g. opacity: 0),
-     making content vanish instead of appearing. */
-  .animate-fade-up {
+  .animate-fade-up,
+  .animate-fade-in {
     animation: none !important;
     opacity: 1 !important;
   }
@@ -73,12 +63,12 @@ h3 {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #131110;
+  background: #0b0b0f;
 }
 ::-webkit-scrollbar-thumb {
-  background: #282320;
+  background: #1e1e2a;
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b342e;
+  background: #2e2e3e;
 }

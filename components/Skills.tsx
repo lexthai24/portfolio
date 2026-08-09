@@ -6,21 +6,21 @@ export default function Skills({ skills }: { skills: SkillGroup[] }) {
   return (
     <Section id="skills" kicker="Skills" title="What I work with">
       <Reveal>
-        <dl className="divide-y divide-line border-y border-line">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((s) => (
             <div
               key={s.group}
-              className="grid gap-1 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6"
+              className="rounded-xl border border-line bg-bg-card p-5 transition-colors hover:border-line-strong"
             >
-              <dt className="font-mono text-xs uppercase tracking-wider text-ink-dim sm:pt-1">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-ink-dim">
                 {s.group}
-              </dt>
-              <dd className="text-sm leading-relaxed text-ink-soft">
+              </p>
+              <p className="mt-2.5 text-sm leading-relaxed text-ink-soft">
                 {s.items.join(" · ")}
-              </dd>
+              </p>
             </div>
           ))}
-        </dl>
+        </div>
       </Reveal>
     </Section>
   );

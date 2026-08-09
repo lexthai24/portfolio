@@ -24,12 +24,10 @@ export default function Nav({ name, email }: { name: string; email: string }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the mobile menu whenever the route changes.
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
-  // While the menu is open: lock body scroll and allow Escape to close.
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -48,11 +46,11 @@ export default function Nav({ name, email }: { name: string; email: string }) {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? "border-b border-line bg-bg/85 backdrop-blur-md"
+          ? "border-b border-line bg-bg/80 backdrop-blur-xl"
           : "border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5">
+      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link
           href="/"
           className="font-display text-base font-semibold tracking-tight text-ink transition-colors hover:text-accent-bright"
@@ -61,7 +59,7 @@ export default function Nav({ name, email }: { name: string; email: string }) {
         </Link>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-7 text-sm sm:flex">
+        <ul className="hidden items-center gap-8 text-sm sm:flex">
           {links.map((l) => {
             const active = pathname === l.href;
             return (
@@ -80,7 +78,7 @@ export default function Nav({ name, email }: { name: string; email: string }) {
           <li>
             <a
               href={`mailto:${email}`}
-              className="text-accent transition-colors hover:text-accent-bright"
+              className="rounded-lg border border-accent/40 px-4 py-2 text-accent transition-all hover:border-accent hover:bg-accent-soft"
             >
               Get in touch
             </a>
@@ -117,11 +115,10 @@ export default function Nav({ name, email }: { name: string; email: string }) {
         </button>
       </nav>
 
-      {/* Mobile menu — framer-motion handles enter/exit */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <div id="mobile-menu" className="sm:hidden">
-            {/* Backdrop */}
             <motion.button
               type="button"
               aria-hidden="true"
@@ -131,15 +128,14 @@ export default function Nav({ name, email }: { name: string; email: string }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="fixed inset-x-0 bottom-0 top-[4.5rem] bg-bg/70 backdrop-blur-sm"
+              className="fixed inset-x-0 bottom-0 top-[3.5rem] bg-bg/70 backdrop-blur-sm"
             />
-            {/* Sheet */}
             <motion.div
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="fixed inset-x-0 top-[4.5rem] border-b border-line bg-bg shadow-xl shadow-black/20"
+              className="fixed inset-x-0 top-[3.5rem] border-b border-line bg-bg shadow-xl shadow-black/30"
             >
               <motion.ul
                 initial="hidden"

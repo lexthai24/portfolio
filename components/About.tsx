@@ -15,7 +15,7 @@ export default function About({
     <>
       <Section kicker="About" title="Ten years of shipping things.">
         <Reveal>
-          <div className="max-w-xl space-y-5 text-[15px] leading-relaxed text-ink-soft">
+          <div className="max-w-2xl space-y-5 text-[15px] leading-relaxed text-ink-soft">
             <p>
               I&apos;m a senior software engineer, a bit over ten years into
               this. Right now I&apos;m at Collins Aerospace, working on
@@ -44,10 +44,10 @@ export default function About({
       </Section>
 
       <Section kicker="Experience" title="Where I've worked">
-        <div className="space-y-12">
+        <div className="space-y-8">
           {career.map((job, i) => (
             <Reveal key={job.company} delay={Math.min(i * 0.05, 0.2)}>
-              <div className="border-t border-line pt-6">
+              <div className="rounded-xl border border-line bg-bg-card p-6 sm:p-8">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="font-display text-lg font-semibold text-ink">
                     {job.role}

@@ -10,7 +10,7 @@ const SECTIONS = [
 
 export default function ProjectCard({ p }: { p: Project }) {
   return (
-    <article className="py-12 first:pt-0">
+    <article className="rounded-xl border border-line bg-bg-card p-6 sm:p-8">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
           {p.title}
@@ -120,7 +120,7 @@ export default function ProjectCard({ p }: { p: Project }) {
               href={p.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-accent/50 px-4 py-1.5 font-medium text-accent transition-colors hover:border-accent hover:text-accent-bright"
+              className="rounded-lg border border-accent/40 px-4 py-2 font-medium text-accent transition-all hover:border-accent hover:bg-accent-soft"
             >
               View it live ↗
             </a>
