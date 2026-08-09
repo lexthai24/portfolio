@@ -20,7 +20,7 @@ export default async function WorkPage() {
   const [profile, projects] = await Promise.all([getProfile(), getProjects()]);
   return (
     <>
-      <Nav name={profile.name} email={profile.email} />
+      <Nav name={profile.name} />
       <main className="pt-24">
         <ProjectCatalog
           projects={projects}

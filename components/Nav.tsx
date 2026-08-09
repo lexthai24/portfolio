@@ -12,7 +12,7 @@ const links = [
   { href: "/projects", label: "Projects" },
 ];
 
-export default function Nav({ name, email }: { name: string; email: string }) {
+export default function Nav({ name }: { name: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -77,7 +77,7 @@ export default function Nav({ name, email }: { name: string; email: string }) {
           })}
           <li>
             <a
-              href={`mailto:${email}`}
+              href="https://t.me/lexthai24"
               className="rounded-lg border border-accent/40 px-4 py-2 text-accent transition-all hover:border-accent hover:bg-accent-soft"
             >
               Get in touch
@@ -176,7 +176,7 @@ export default function Nav({ name, email }: { name: string; email: string }) {
                   className="mt-2 border-t border-line pt-3"
                 >
                   <a
-                    href={`mailto:${email}`}
+                    href="https://t.me/lexthai24"
                     onClick={() => setOpen(false)}
                     className="block py-1 text-accent transition-colors hover:text-accent-bright"
                   >

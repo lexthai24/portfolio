@@ -29,7 +29,7 @@ export default async function AboutPage() {
   ]);
   return (
     <>
-      <Nav name={profile.name} email={profile.email} />
+      <Nav name={profile.name} />
       <main className="pt-24">
         <About career={career} education={education} languages={languages} />
         <Skills skills={skills} />

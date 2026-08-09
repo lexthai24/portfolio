@@ -11,7 +11,7 @@ export default async function Home() {
   const [profile, projects] = await Promise.all([getProfile(), getProjects()]);
   return (
     <>
-      <Nav name={profile.name} email={profile.email} />
+      <Nav name={profile.name} />
       <main>
         <Hero profile={profile} />
         <FeaturedWork projects={projects} />
