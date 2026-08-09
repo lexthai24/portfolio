@@ -78,6 +78,8 @@ export default function Nav({ name }: { name: string }) {
           <li>
             <a
               href="https://t.me/lexthai24"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-lg border border-accent/40 px-4 py-2 text-accent transition-all hover:border-accent hover:bg-accent-soft"
             >
               Get in touch
@@ -177,6 +179,8 @@ export default function Nav({ name }: { name: string }) {
                 >
                   <a
                     href="https://t.me/lexthai24"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setOpen(false)}
                     className="block py-1 text-accent transition-colors hover:text-accent-bright"
                   >

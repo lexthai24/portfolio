@@ -50,11 +50,16 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "glow-pulse": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.7" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out forwards",
         "fade-in": "fade-in 0.6s ease-out forwards",
         shimmer: "shimmer 3s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 4s ease-in-out infinite",
       },
       spacing: {
         "18": "4.5rem",

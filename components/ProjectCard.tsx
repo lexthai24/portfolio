@@ -10,7 +10,7 @@ const SECTIONS = [
 
 export default function ProjectCard({ p }: { p: Project }) {
   return (
-    <article className="rounded-xl border border-line bg-bg-card p-6 sm:p-8">
+    <article className="glass-card glow-border rounded-xl p-6 sm:p-8 transition-all duration-300 hover:shadow-[0_0_40px_rgba(99,102,241,0.08)]">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
           {p.title}

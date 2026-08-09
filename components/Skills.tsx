@@ -10,12 +10,15 @@ export default function Skills({ skills }: { skills: SkillGroup[] }) {
           {skills.map((s) => (
             <div
               key={s.group}
-              className="rounded-xl border border-line bg-bg-card p-5 transition-colors hover:border-line-strong"
+              className="glass-card glow-border rounded-xl p-5 transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.06)]"
             >
-              <p className="font-mono text-[11px] uppercase tracking-wider text-ink-dim">
-                {s.group}
-              </p>
-              <p className="mt-2.5 text-sm leading-relaxed text-ink-soft">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-accent/60" />
+                <p className="font-mono text-[11px] uppercase tracking-wider text-ink-dim">
+                  {s.group}
+                </p>
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft">
                 {s.items.join(" · ")}
               </p>
             </div>
