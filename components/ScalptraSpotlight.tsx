@@ -20,26 +20,54 @@ export default function ScalptraSpotlight() {
     <section id="scalptra" className="relative scroll-mt-24 overflow-hidden border-y border-line-subtle bg-[#0d1018] py-24 sm:py-32">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_38%_at_50%_0%,rgba(34,211,238,0.12),transparent_72%),radial-gradient(ellipse_44%_26%_at_90%_58%,rgba(168,85,247,0.12),transparent_76%)]" />
       <div className="relative mx-auto max-w-6xl px-6">
-        <Reveal>
-          <div className="max-w-3xl">
-            <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-200/70">
-              <span className="flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/5 px-3 py-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
-                Flagship case study
-              </span>
-              <span>2026 — present</span>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(19rem,0.75fr)] lg:items-end lg:gap-16">
+          <Reveal>
+            <div className="max-w-4xl">
+              <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-200/70">
+                <span className="flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/5 px-3 py-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
+                  Flagship case study
+                </span>
+                <span>2026 — present</span>
+              </div>
+              <p className="mt-7 font-mono text-sm uppercase tracking-[0.24em] text-cyan-200/80">Scalptra</p>
+              <h2 className="mt-3 max-w-[15ch] font-display text-4xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-6xl lg:max-w-none lg:text-[4.25rem]">
+                AI-assisted futures trading, engineered around risk.
+              </h2>
+              <p className="mt-7 max-w-3xl text-lg leading-relaxed text-ink-soft">
+                A production-grade crypto futures platform for Binance and OKX USDⓈ-M markets. Deterministic services generate signals, size positions, enforce risk limits, and execute orders; AI reviews each setup, but never gets to override the risk engine.
+              </p>
+              <p className="mt-4 max-w-3xl text-[15px] leading-relaxed text-ink-soft">
+                I owned the journey from early requirements and trading workflows through product design, distributed-system architecture, frontend and backend development, deployment, and ongoing production operations. The system is running end to end, showing positive forward-test performance, while the model is being fine-tuned for better prediction quality.
+              </p>
             </div>
-            <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-ink sm:text-6xl">
-              Scalptra — AI-assisted futures trading, engineered around risk.
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              A production-grade crypto futures platform for Binance and OKX USDⓈ-M markets. Deterministic services generate signals, size positions, enforce risk limits, and execute orders; AI reviews each setup, but never gets to override the risk engine.
-            </p>
-            <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink-soft">
-              I owned the journey from early requirements and trading workflows through product design, distributed-system architecture, frontend and backend development, deployment, and ongoing production operations. The system is running end to end, showing positive forward-test performance, while the model is being fine-tuned for better prediction quality.
-            </p>
-          </div>
-        </Reveal>
+          </Reveal>
+
+          <Reveal delay={0.1} className="lg:pb-1">
+            <aside className="relative overflow-hidden rounded-2xl border border-cyan-200/20 bg-slate-950/70 p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
+              <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-cyan-400/15 blur-3xl" />
+              <div className="relative">
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-200/70">Product access</p>
+                <p className="mt-4 font-display text-3xl font-semibold leading-tight text-ink">
+                  See the live platform in motion.
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+                  Explore the public product experience, the trading workspace, and the risk-first interface behind Scalptra.
+                </p>
+                <a
+                  href="https://scalptra.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-8 flex w-full items-center justify-between rounded-xl bg-gradient-to-r from-cyan-300 to-violet-400 px-5 py-4 text-sm font-semibold text-slate-950 transition-transform hover:-translate-y-0.5"
+                >
+                  <span>Live Demo</span>
+                  <span className="text-lg transition-transform group-hover:translate-x-1">↗</span>
+                </a>
+                <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">Opens scalptra.com</p>
+              </div>
+            </aside>
+          </Reveal>
+        </div>
 
         <Reveal delay={0.08} className="mt-12">
           <div className="overflow-hidden rounded-2xl border border-cyan-200/15 bg-[#090c13] shadow-[0_24px_90px_rgba(0,0,0,0.45)]">
