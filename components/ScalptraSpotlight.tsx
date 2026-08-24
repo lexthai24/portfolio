@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Reveal from "./Reveal";
+import ImageLightbox from "./ImageLightbox";
 
 const ownership = [
   ["01", "Requirements & strategy", "Mapped trading workflows, exchange constraints, and safety rules into a product the team could build and validate."],
@@ -75,13 +75,12 @@ export default function ScalptraSpotlight() {
               <span>scalptra.com — public product experience</span>
               <span className="text-emerald-300">SYSTEM ONLINE · MODEL ITERATION ACTIVE</span>
             </div>
-            <Image
+            <ImageLightbox
               src="/projects/scalptra01.png"
               alt="Scalptra public landing page for the AI-assisted crypto futures trading platform"
               width={1920}
               height={1080}
               priority
-              className="h-auto w-full"
               sizes="(max-width: 1152px) 100vw, 1152px"
             />
           </div>
@@ -90,12 +89,11 @@ export default function ScalptraSpotlight() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <Reveal delay={0.04}>
             <figure className="overflow-hidden rounded-xl border border-white/10 bg-[#090c13]">
-              <Image
+              <ImageLightbox
                 src="/projects/scalptra02.png"
                 alt="Scalptra positions screen showing open positions and live profit and loss"
                 width={1920}
                 height={1080}
-                className="h-auto w-full"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
               <figcaption className="border-t border-white/5 px-5 py-4 text-sm leading-relaxed text-ink-soft">
@@ -105,12 +103,11 @@ export default function ScalptraSpotlight() {
           </Reveal>
           <Reveal delay={0.1}>
             <figure className="overflow-hidden rounded-xl border border-white/10 bg-[#090c13]">
-              <Image
+              <ImageLightbox
                 src="/projects/scalptra03.png"
                 alt="Scalptra dashboard showing position controls and risk calculations"
                 width={1920}
                 height={1080}
-                className="h-auto w-full"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
               <figcaption className="border-t border-white/5 px-5 py-4 text-sm leading-relaxed text-ink-soft">
