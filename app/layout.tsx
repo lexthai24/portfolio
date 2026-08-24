@@ -25,12 +25,23 @@ const mono = JetBrains_Mono({
 export async function generateMetadata(): Promise<Metadata> {
   const profile = await getProfile();
   return {
+    metadataBase: new URL("https://lex.nvxthai.dev"),
     title: `${profile.name} — ${profile.role}`,
-    description: profile.summary,
+    description:
+      "Senior software engineer building complex products from requirements and UX through architecture, implementation, and production — including Scalptra, an AI-assisted futures trading platform.",
     openGraph: {
       title: `${profile.name} — ${profile.role}`,
-      description: profile.tagline,
+      description:
+        "Complex products, carried all the way to production. Explore Scalptra and selected engineering work.",
       type: "website",
+      images: [
+        {
+          url: "/projects/scalptra01.png",
+          width: 1920,
+          height: 1080,
+          alt: "Scalptra — AI-assisted futures trading platform",
+        },
+      ],
     },
     robots: { index: true, follow: true },
   };

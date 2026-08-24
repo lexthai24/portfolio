@@ -35,12 +35,12 @@ export default function Hero({ profile }: { profile: Profile }) {
             variants={item}
             className="font-display text-5xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-7xl lg:text-[5.25rem]"
           >
-            Software that
+            Complex products,
             <br />
-            can&apos;t afford to be{" "}
+            carried all the way to{" "}
             <span className="relative">
               <span className="bg-gradient-to-r from-accent to-accent-bright bg-clip-text text-transparent">
-                wrong
+                production
               </span>
               <span className="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-gradient-to-r from-accent/40 to-accent-bright/40 blur-sm" />
             </span>
@@ -51,7 +51,7 @@ export default function Hero({ profile }: { profile: Profile }) {
             variants={item}
             className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft"
           >
-            {profile.summary}
+            I turn complex requirements into dependable software — from product discovery and UX design to architecture, implementation, deployment, and the work of keeping a system healthy in production.
           </motion.p>
 
           <motion.div
@@ -59,17 +59,17 @@ export default function Hero({ profile }: { profile: Profile }) {
             className="mt-12 flex flex-wrap items-center gap-4"
           >
             <Link
-              href="/work"
+              href="#scalptra"
               className="group relative overflow-hidden rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-all hover:bg-accent-bright hover:shadow-[0_0_32px_rgba(99,102,241,0.3)]"
             >
-              <span className="relative z-10">See the work</span>
+              <span className="relative z-10">Explore Scalptra</span>
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
             </Link>
             <Link
-              href="/about"
+              href="/projects"
               className="glass-card rounded-lg border border-white/5 px-6 py-3 text-sm font-medium text-ink-soft transition-all hover:border-line-strong hover:text-ink hover:shadow-[0_0_20px_rgba(99,102,241,0.08)]"
             >
-              More about me
+              View selected work
             </Link>
             <a
               href={profile.github}
@@ -86,8 +86,8 @@ export default function Hero({ profile }: { profile: Profile }) {
             className="mt-16 border-t border-line-subtle pt-6"
           >
             <p className="font-mono text-xs leading-relaxed text-ink-dim">
-              Currently {profile.currently} · before that: a trading platform, a
-              hotel-booking app, and a UN operation in Iceland
+              Currently {profile.currently} · building for domains where correctness,
+              safety, and delivery all matter
             </p>
           </motion.div>
         </motion.div>

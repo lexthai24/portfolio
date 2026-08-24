@@ -12,7 +12,7 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
     .slice(0, 3);
 
   return (
-    <Section kicker="Selected work" title="A few things I've built">
+    <Section kicker="More selected work" title="Other systems I&apos;ve built">
       <div className="grid gap-4">
         {featured.map((p, i) => {
           const href = p.demo ?? p.link?.href;
@@ -51,11 +51,11 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
       </div>
 
       <div className="mt-10 flex flex-wrap gap-6">
+        <Link href="/projects" className="u-link text-sm">
+          See all projects →
+        </Link>
         <Link href="/work" className="u-link text-sm">
           Client work →
-        </Link>
-        <Link href="/projects" className="u-link text-sm">
-          Personal projects →
         </Link>
       </div>
     </Section>

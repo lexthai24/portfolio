@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import ScalptraSpotlight from "@/components/ScalptraSpotlight";
 import FeaturedWork from "@/components/FeaturedWork";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -14,7 +15,12 @@ export default async function Home() {
       <Nav name={profile.name} />
       <main>
         <Hero profile={profile} />
-        <FeaturedWork projects={projects} />
+        <ScalptraSpotlight />
+        <FeaturedWork
+          projects={projects.filter(
+            (project) => project.title !== "AI-Assisted Crypto Futures Trading Platform"
+          )}
+        />
         <Contact profile={profile} />
       </main>
       <Footer profile={profile} />
