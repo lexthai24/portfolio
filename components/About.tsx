@@ -17,13 +17,12 @@ export default function About({
         <Reveal>
           <div className="max-w-2xl space-y-5 text-[15px] leading-relaxed text-ink-soft">
             <p>
-              I&apos;m a senior software engineer, a bit over ten years into
-              this. Right now I&apos;m at Collins Aerospace, working on
-              ground-operations and border-control systems for airports:
-              auto-gates, security checkpoints, passenger pre-screening, and
-              the integrations that tie them to biometrics and government
-              data. It&apos;s the kind of work where downtime and wrong answers
-              both have real consequences, which suits how I like to build.
+              I&apos;m a senior software engineer with a bit over ten years of
+              experience. I&apos;m currently at InnoLab, where I lead day-to-day
+              engineering and build healthcare software for medical workflows
+              and laboratory data processing. I design system architecture,
+              integrate lab-result APIs, improve reliability, and mentor the
+              team through complex application and production problems.
             </p>
             <p>
               Before that I spent four years as a technical business analyst
