@@ -29,7 +29,26 @@ export default function ProjectCard({ p }: { p: Project }) {
         {p.blurb}
       </p>
 
-      {p.image &&
+      {p.gallery && p.gallery.length > 0 ? (
+        <div className="mt-6 grid gap-3 md:grid-cols-2">
+          {p.gallery.map((image) => (
+            <div key={image.src} className="overflow-hidden rounded-lg">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                className={`h-auto w-full transition-transform duration-500 hover:scale-[1.012] ${
+                  image.framed ? "rounded-lg border border-line" : ""
+                }`}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                unoptimized
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        p.image &&
         (() => {
           const img = (
             <Image
@@ -60,7 +79,8 @@ export default function ProjectCard({ p }: { p: Project }) {
           ) : (
             <div className="mt-6">{img}</div>
           );
-        })()}
+        })()
+      )}
 
       <div className="mt-7 space-y-6">
         {SECTIONS.map(([label, key]) => (
@@ -100,6 +120,36 @@ export default function ProjectCard({ p }: { p: Project }) {
                       </>
                     ) : (
                       c
+                    )}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+
+      {p.highlights && p.highlights.length > 0 && (
+        <div className="mt-7">
+          <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-ink-dim">
+            <span className="h-px w-3 bg-accent/50" />
+            What shipped
+          </p>
+          <ul className="mt-2.5 grid gap-x-8 gap-y-2.5 md:grid-cols-2">
+            {p.highlights.map((highlight) => {
+              const [head, ...rest] = highlight.split(":");
+              const hasHead = rest.length > 0;
+              return (
+                <li key={highlight} className="flex gap-3 text-sm leading-relaxed text-ink-soft">
+                  <span className="mt-[9px] h-px w-4 shrink-0 bg-accent/60" />
+                  <span>
+                    {hasHead ? (
+                      <>
+                        <span className="font-medium text-ink">{head}.</span>
+                        {rest.join(":")}
+                      </>
+                    ) : (
+                      highlight
                     )}
                   </span>
                 </li>
