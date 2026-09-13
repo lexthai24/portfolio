@@ -13,10 +13,18 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] } },
 };
 
+const focusAreas = [
+  ["Product", "Requirements, workflows, and UX that people can actually use."],
+  ["Systems", "APIs, financial flows, data, realtime services, and integrations."],
+  ["Production", "Deployment, reliability, observability, and the work after launch."],
+];
+
 export default function Hero({ profile }: { profile: Profile }) {
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute -top-40 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px] pointer-events-none" />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 pointer-events-none">
+        <div className="h-[500px] w-[500px] rounded-full bg-accent/10 blur-[120px] animate-ambient-drift" />
+      </div>
       <div className="mx-auto max-w-5xl px-6 pb-24 pt-40 sm:pt-48">
         <motion.div variants={container} initial="hidden" animate="show">
           {profile.available && (
@@ -59,17 +67,17 @@ export default function Hero({ profile }: { profile: Profile }) {
             className="mt-12 flex flex-wrap items-center gap-4"
           >
             <Link
-              href="#scalptra"
+              href="#selected-work"
               className="group relative overflow-hidden rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-all hover:bg-accent-bright hover:shadow-[0_0_32px_rgba(99,102,241,0.3)]"
             >
-              <span className="relative z-10">Explore Scalptra</span>
+              <span className="relative z-10">View selected work</span>
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
             </Link>
             <Link
-              href="/projects"
+              href="/work"
               className="glass-card rounded-lg border border-white/5 px-6 py-3 text-sm font-medium text-ink-soft transition-all hover:border-line-strong hover:text-ink hover:shadow-[0_0_20px_rgba(99,102,241,0.08)]"
             >
-              View selected work
+              Client work
             </Link>
             <a
               href={profile.github}
@@ -83,13 +91,22 @@ export default function Hero({ profile }: { profile: Profile }) {
 
           <motion.div
             variants={item}
-            className="mt-16 border-t border-line-subtle pt-6"
+            className="mt-16 grid gap-4 border-t border-line-subtle pt-6 sm:grid-cols-3"
           >
-            <p className="font-mono text-xs leading-relaxed text-ink-dim">
-              Currently {profile.currently} · building for domains where correctness,
-              safety, and delivery all matter
-            </p>
+            {focusAreas.map(([title, description]) => (
+              <div key={title} className="border-l border-line-subtle pl-4 first:border-l-0 first:pl-0">
+                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-bright">
+                  {title}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{description}</p>
+              </div>
+            ))}
           </motion.div>
+
+          <motion.p variants={item} className="mt-8 font-mono text-xs leading-relaxed text-ink-dim">
+            Currently {profile.currently} · building for domains where correctness,
+            safety, and delivery all matter
+          </motion.p>
         </motion.div>
       </div>
     </section>

@@ -54,12 +54,17 @@ const config: Config = {
           "0%, 100%": { opacity: "0.4" },
           "50%": { opacity: "0.7" },
         },
+        "ambient-drift": {
+          "0%": { transform: "scale(1) translate3d(0, 0, 0)" },
+          "100%": { transform: "scale(1.08) translate3d(0, -2.5%, 0)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out forwards",
         "fade-in": "fade-in 0.6s ease-out forwards",
         shimmer: "shimmer 3s ease-in-out infinite",
         "glow-pulse": "glow-pulse 4s ease-in-out infinite",
+        "ambient-drift": "ambient-drift 26s ease-in-out infinite alternate",
       },
       spacing: {
         "18": "4.5rem",

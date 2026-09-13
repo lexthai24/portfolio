@@ -5,7 +5,7 @@ export default function Contact({ profile }: { profile: Profile }) {
   return (
     <section id="contact" className="mx-auto max-w-5xl scroll-mt-28 px-6 py-24">
       <Reveal>
-        <div className="rounded-xl border border-line bg-bg-card p-8 sm:p-12">
+        <div className="glow-border rounded-xl border border-line bg-gradient-to-br from-bg-card to-bg-soft p-8 transition-colors duration-500 sm:p-12">
           <p className="font-mono text-xs uppercase tracking-widest text-ink-dim">Contact</p>
           <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
             Say hello.

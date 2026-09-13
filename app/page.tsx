@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import AmbientFlow from "@/components/AmbientFlow";
 import ScalptraSpotlight from "@/components/ScalptraSpotlight";
 import FeaturedWork from "@/components/FeaturedWork";
 import Contact from "@/components/Contact";
@@ -12,16 +13,21 @@ export default async function Home() {
   const [profile, projects] = await Promise.all([getProfile(), getProjects()]);
   return (
     <>
+      <AmbientFlow />
       <Nav name={profile.name} />
       <main>
-        <Hero profile={profile} />
-        <ScalptraSpotlight />
-        <FeaturedWork
-          projects={projects.filter(
-            (project) => project.title !== "AI-Assisted Crypto Futures Trading Platform"
-          )}
-        />
-        <Contact profile={profile} />
+        <div data-flow-theme="hero">
+          <Hero profile={profile} />
+        </div>
+        <div data-flow-theme="work">
+          <FeaturedWork projects={projects} />
+        </div>
+        <div data-flow-theme="scalptra">
+          <ScalptraSpotlight />
+        </div>
+        <div data-flow-theme="contact">
+          <Contact profile={profile} />
+        </div>
       </main>
       <Footer profile={profile} />
     </>

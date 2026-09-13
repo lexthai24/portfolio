@@ -58,6 +58,10 @@ h1, h2, h3 {
     animation: none !important;
     opacity: 1 !important;
   }
+  .ambient-scene {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 /* Understated underline links */
@@ -86,6 +90,20 @@ h1, h2, h3 {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #2e2e3e;
+}
+
+/* Scroll-driven ambient color scenes (see components/AmbientFlow.tsx).
+   Scenes stack at full size and crossfade via opacity so the page hue
+   flows continuously instead of switching at section boundaries. */
+.ambient-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1400ms ease;
+  will-change: opacity;
+}
+.ambient-scene--active {
+  opacity: 1;
 }
 
 /* Glass effect */
