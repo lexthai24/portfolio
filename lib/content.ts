@@ -40,6 +40,8 @@ export type Project = {
   link?: { label: string; href: string };
 };
 
+type GalleryImage = NonNullable<Project["gallery"]>[number];
+
 export type Profile = {
   name: string;
   handle: string;
@@ -88,6 +90,113 @@ const FALLBACK_PROFILE: Profile = {
 
 const asStrings = (v: unknown): string[] =>
   Array.isArray(v) ? (v as unknown[]).map((x) => String(x)) : [];
+
+const RICHGN_GALLERY: GalleryImage[] = [
+  {
+    src: "/projects/richgn-member-portal.png",
+    alt: "RichGlobal member portal dashboard showing Cash, RP, CR, and Bonus wallets",
+    width: 1916,
+    height: 906,
+    framed: true,
+  },
+  {
+    src: "/projects/richgn-flush-system.png",
+    alt: "RichGlobal admin Flush System dashboard showing retention and inactivity states",
+    width: 1919,
+    height: 911,
+    framed: true,
+  },
+];
+
+const PROJECT_GALLERY_OVERRIDES: Array<{
+  matcher: RegExp;
+  gallery: GalleryImage[];
+}> = [
+  { matcher: /richgn|richglobal/i, gallery: RICHGN_GALLERY },
+  {
+    matcher: /ai-assisted crypto futures/i,
+    gallery: [
+      {
+        src: "/projects/scalptra01.png",
+        alt: "Scalptra public landing page for the AI-assisted crypto futures trading platform",
+        width: 1920,
+        height: 1080,
+      },
+      {
+        src: "/projects/scalptra02.png",
+        alt: "Scalptra trading dashboard and market interface",
+        width: 1920,
+        height: 1080,
+      },
+      {
+        src: "/projects/scalptra03.png",
+        alt: "Scalptra product interface showing platform capabilities",
+        width: 1920,
+        height: 1080,
+      },
+    ],
+  },
+  {
+    matcher: /police alarm/i,
+    gallery: [
+      {
+        src: "/projects/policemuk.png",
+        alt: "Police alarm system command dashboard for gold shops",
+        width: 1920,
+        height: 906,
+        framed: true,
+      },
+    ],
+  },
+  {
+    matcher: /docflow/i,
+    gallery: [
+      {
+        src: "/projects/docflow.png",
+        alt: "DocFlow document management dashboard",
+        width: 1920,
+        height: 911,
+        framed: true,
+      },
+    ],
+  },
+  {
+    matcher: /football predictions/i,
+    gallery: [
+      {
+        src: "/projects/nexscor.png",
+        alt: "Nexscor football scores and analysis homepage",
+        width: 1440,
+        height: 900,
+        framed: true,
+      },
+    ],
+  },
+  {
+    matcher: /ai exam prep/i,
+    gallery: [
+      {
+        src: "/projects/aiexam.png",
+        alt: "AI Exam Prep question interface with an AI explanation",
+        width: 1440,
+        height: 1150,
+        framed: true,
+      },
+    ],
+  },
+];
+
+function applyProjectGallery(project: Project): Project {
+  const override = PROJECT_GALLERY_OVERRIDES.find(({ matcher }) => matcher.test(project.title));
+  if (!override) return project;
+
+  const gallery = project.gallery?.length ? project.gallery : override.gallery;
+  return {
+    ...project,
+    image: project.image ?? gallery[0],
+    gallery,
+  };
+}
 
 const RICHGN_PROJECT_DETAILS: Pick<
   Project,
@@ -151,22 +260,7 @@ const RICHGN_PROJECT_DETAILS: Pick<
     "NowPayments",
   ],
   demo: "https://richgn.com",
-  gallery: [
-    {
-      src: "/projects/richgn-member-portal.png",
-      alt: "RichGlobal member portal dashboard showing Cash, RP, CR, and Bonus wallets",
-      width: 1916,
-      height: 906,
-      framed: true,
-    },
-    {
-      src: "/projects/richgn-flush-system.png",
-      alt: "RichGlobal admin Flush System dashboard showing retention and inactivity states",
-      width: 1919,
-      height: 911,
-      framed: true,
-    },
-  ],
+  gallery: RICHGN_GALLERY,
 };
 
 // ─── Readers (server-only) ───
@@ -232,12 +326,14 @@ export async function getProjects(): Promise<Project[]> {
     link: r.linkHref
       ? { label: r.linkLabel ?? "Link", href: r.linkHref }
       : undefined,
-  })).map((project) =>
-    project.title.toLowerCase().includes("richglobal") ||
-    project.title.toLowerCase().includes("richgn")
-      ? { ...project, ...RICHGN_PROJECT_DETAILS }
-      : project,
-  );
+  }))
+    .map((project) =>
+      project.title.toLowerCase().includes("richglobal") ||
+      project.title.toLowerCase().includes("richgn")
+        ? { ...project, ...RICHGN_PROJECT_DETAILS }
+        : project,
+    )
+    .map(applyProjectGallery);
   }, []);
 }
 

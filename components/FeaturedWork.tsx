@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ImageLightbox from "./ImageLightbox";
 import Reveal from "./Reveal";
 import Section from "./Section";
 import { TechBadges } from "./TechBadge";
@@ -7,10 +8,10 @@ import type { Project } from "@/lib/content";
 const FEATURED_MATCHERS = [
   /richgn|richglobal/i,
   /ai-assisted crypto futures/i,
-  /enterprise payroll/i,
   /police alarm/i,
   /docflow/i,
   /football predictions/i,
+  /ai exam prep/i,
 ];
 
 function selectProjects(projects: Project[]): Project[] {
@@ -48,6 +49,12 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
         {featured.map((project, index) => {
           const externalHref = project.demo ?? project.link?.href;
           const externalLabel = project.demo ? "Live demo" : project.link?.label;
+          const gallery = project.gallery?.length
+            ? project.gallery
+            : project.image
+              ? [project.image]
+              : [];
+          const previewImage = gallery[0];
 
           return (
             <Reveal key={project.title} delay={Math.min(index * 0.04, 0.2)}>
@@ -62,7 +69,21 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
                   </div>
                 </div>
 
-                <h3 className="mt-8 font-display text-2xl font-semibold leading-tight tracking-tight text-ink transition-colors group-hover:text-accent-bright">
+                {previewImage && (
+                  <div className="mt-6 overflow-hidden rounded-lg border border-line-subtle bg-black/20">
+                    <ImageLightbox
+                      src={previewImage.src}
+                      alt={previewImage.alt}
+                      width={previewImage.width}
+                      height={previewImage.height}
+                      images={gallery}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      previewClassName="h-52 w-full object-cover object-top"
+                    />
+                  </div>
+                )}
+
+                <h3 className="mt-6 font-display text-2xl font-semibold leading-tight tracking-tight text-ink transition-colors group-hover:text-accent-bright">
                   {project.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-soft">{project.blurb}</p>
