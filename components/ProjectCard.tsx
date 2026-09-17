@@ -42,7 +42,6 @@ export default function ProjectCard({ p }: { p: Project }) {
                   image.framed ? "rounded-lg border border-line" : ""
                 }`}
                 sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized
               />
             </div>
           ))}
@@ -61,7 +60,6 @@ export default function ProjectCard({ p }: { p: Project }) {
               }`}
               style={{ maxWidth: p.image.width }}
               sizes="(max-width: 768px) 100vw, 672px"
-              unoptimized
             />
           );
           return p.demo ? (

@@ -48,10 +48,10 @@ export default function ScalptraSpotlight() {
         <Reveal delay={0.08}>
           <figure className="overflow-hidden rounded-2xl border border-cyan-200/15 bg-[#090c13] shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
             <ImageLightbox
-              src="/projects/scalptra01.png"
+              src="/projects/scalptra01.webp"
               alt="Scalptra public landing page for the AI-assisted crypto futures trading platform"
-              width={1920}
-              height={1080}
+              width={1280}
+              height={605}
               priority
               sizes="(max-width: 1024px) 100vw, 576px"
             />

@@ -36,9 +36,9 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       images: [
         {
-          url: "/projects/scalptra01.png",
-          width: 1920,
-          height: 1080,
+          url: "/projects/scalptra01.webp",
+          width: 1280,
+          height: 605,
           alt: "Scalptra — AI-assisted futures trading platform",
         },
       ],

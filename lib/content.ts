@@ -91,16 +91,37 @@ const FALLBACK_PROFILE: Profile = {
 const asStrings = (v: unknown): string[] =>
   Array.isArray(v) ? (v as unknown[]).map((x) => String(x)) : [];
 
+const WEBP_PROJECT_ASSETS = new Set([
+  "aiexam.png",
+  "docflow.png",
+  "einvoice.png",
+  "nexscor.png",
+  "policemuk.png",
+  "richgn-flush-system.png",
+  "richgn-member-portal.png",
+  "scalptra01.png",
+  "scalptra02.png",
+  "scalptra03.png",
+  "scalptra2.png",
+]);
+
+function optimizedProjectImageSrc(src: string): string {
+  const fileName = src.split("/").at(-1);
+  if (!fileName || !WEBP_PROJECT_ASSETS.has(fileName)) return src;
+
+  return src.replace(/\.png$/i, ".webp");
+}
+
 const RICHGN_GALLERY: GalleryImage[] = [
   {
-    src: "/projects/richgn-member-portal.png",
+    src: "/projects/richgn-member-portal.webp",
     alt: "RichGlobal member portal dashboard showing Cash, RP, CR, and Bonus wallets",
     width: 1916,
     height: 906,
     framed: true,
   },
   {
-    src: "/projects/richgn-flush-system.png",
+    src: "/projects/richgn-flush-system.webp",
     alt: "RichGlobal admin Flush System dashboard showing retention and inactivity states",
     width: 1919,
     height: 911,
@@ -150,6 +171,13 @@ const AUTHORITATIVE_DICE_DEMO: Project = {
   ],
   status: "Practice / demo — not a real-money product",
   demo: "https://dicedemo.nvxthai.dev/",
+  image: {
+    src: "/projects/dice-demo.webp",
+    alt: "Authoritative Dice Game showing the Three.js table, dice, live result, and WebSocket connection state",
+    width: 1264,
+    height: 705,
+    framed: true,
+  },
   link: {
     label: "Live dashboard demo",
     href: "https://diceadmindemo.nvxthai.dev/",
@@ -165,19 +193,19 @@ const PROJECT_GALLERY_OVERRIDES: Array<{
     matcher: /ai-assisted crypto futures/i,
     gallery: [
       {
-        src: "/projects/scalptra01.png",
+        src: "/projects/scalptra01.webp",
         alt: "Scalptra public landing page for the AI-assisted crypto futures trading platform",
         width: 1920,
         height: 1080,
       },
       {
-        src: "/projects/scalptra02.png",
+        src: "/projects/scalptra02.webp",
         alt: "Scalptra trading dashboard and market interface",
         width: 1920,
         height: 1080,
       },
       {
-        src: "/projects/scalptra03.png",
+        src: "/projects/scalptra03.webp",
         alt: "Scalptra product interface showing platform capabilities",
         width: 1920,
         height: 1080,
@@ -188,7 +216,7 @@ const PROJECT_GALLERY_OVERRIDES: Array<{
     matcher: /police alarm/i,
     gallery: [
       {
-        src: "/projects/policemuk.png",
+        src: "/projects/policemuk.webp",
         alt: "Police alarm system command dashboard for gold shops",
         width: 1920,
         height: 906,
@@ -200,7 +228,7 @@ const PROJECT_GALLERY_OVERRIDES: Array<{
     matcher: /docflow/i,
     gallery: [
       {
-        src: "/projects/docflow.png",
+        src: "/projects/docflow.webp",
         alt: "DocFlow document management dashboard",
         width: 1920,
         height: 911,
@@ -212,7 +240,7 @@ const PROJECT_GALLERY_OVERRIDES: Array<{
     matcher: /football predictions/i,
     gallery: [
       {
-        src: "/projects/nexscor.png",
+        src: "/projects/nexscor.webp",
         alt: "Nexscor football scores and analysis homepage",
         width: 1440,
         height: 900,
@@ -224,7 +252,7 @@ const PROJECT_GALLERY_OVERRIDES: Array<{
     matcher: /ai exam prep/i,
     gallery: [
       {
-        src: "/projects/aiexam.png",
+        src: "/projects/aiexam.webp",
         alt: "AI Exam Prep question interface with an AI explanation",
         width: 1440,
         height: 1150,
@@ -363,7 +391,7 @@ export async function getProjects(): Promise<Project[]> {
     order: r.order,
     image: r.imageSrc
       ? {
-          src: r.imageSrc,
+          src: optimizedProjectImageSrc(r.imageSrc),
           alt: r.imageAlt ?? "",
           width: r.imageWidth ?? 1200,
           height: r.imageHeight ?? 800,
