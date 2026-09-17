@@ -108,6 +108,54 @@ const RICHGN_GALLERY: GalleryImage[] = [
   },
 ];
 
+const AUTHORITATIVE_DICE_DEMO: Project = {
+  id: -1,
+  title: "Authoritative Dice Game — Three.js Practice Demo",
+  kind: "Personal project",
+  nda: false,
+  year: "2026",
+  priority: 2,
+  tags: ["TypeScript", "Three.js", "WebSockets", "Realtime", "Game Tech"],
+  blurb:
+    "A real-time dice betting practice demo where the server owns the physics and outcome while the browser replays the authoritative trace in a Three.js scene. Built to explore trustworthy realtime gameplay without treating the client as the source of truth.",
+  problem:
+    "A multiplayer dice experience must look responsive and convincing while keeping results resistant to client-side manipulation. Letting every browser simulate its own physics creates visual drift, inconsistent outcomes, and an avoidable trust boundary. The goal was to make the animation feel local while preserving a single server-authoritative result.",
+  approach:
+    "The server calculates the dice physics and sends a WebSocket trace for every frame. On the client, AuthoritativeDiceScene interpolates each die's position and quaternion from that trace using Three.js, so the browser plays back the exact authoritative motion instead of running a second Rapier simulation. React Three Fiber provides the WebGL Canvas, while drei supplies RoundedBox, Environment, Lightformer, and debug-only OrbitControls. Custom Three.js geometry and materials build the dice, pips, tray, table, felt, lighting, shadows, and cover.",
+  outcome:
+    "A live practice/demo experience with a separate operational dashboard. The scene stays visually consistent with the server result, and adaptive quality keeps playback usable across lower-end and higher-end devices: lower DPR with selected effects disabled and a 30 FPS cap on low-spec devices, 45 FPS for mid-range devices, and the full scene on capable hardware.",
+  challenges: [
+    "Server-authoritative results: the server is the only authority for physics and the final outcome; the browser renders and replays rather than deciding a roll.",
+    "Frame trace playback: WebSocket messages carry the physics trace for each frame, and the client interpolates position and quaternion data to make the server result feel continuous.",
+    "Rendering stack: React Three Fiber owns the WebGL Canvas, with Three.js geometry, materials, lighting, shadows, felt, dice pips, tray, and cover creating the game table.",
+    "Quality tiers: low-spec devices reduce DPR, disable selected shadows, dome, and lights, and cap playback at 30 FPS; mid-range devices target 45 FPS; capable devices use full quality.",
+    "Debug ergonomics: OrbitControls are available only in debug mode, keeping the production interaction surface focused on the game.",
+  ],
+  highlights: [
+    "Live practice demo: a browser-based dice betting practice experience with server-authoritative results.",
+    "Realtime transport: WebSockets stream the authoritative physics trace to connected clients.",
+    "AuthoritativeDiceScene: Three.js interpolation of server-sent positions and quaternions, without duplicating Rapier physics in the browser.",
+    "Three.js scene: React Three Fiber Canvas, drei helpers, custom dice and pips, table, felt, lights, shadows, tray, and cover.",
+    "Adaptive performance: dynamic DPR and scene-quality tiers for 30 FPS, 45 FPS, and full-quality hardware profiles.",
+    "Operations demo: a separate live dashboard for observing the demo workflow.",
+  ],
+  stack: [
+    "TypeScript",
+    "React",
+    "Three.js",
+    "React Three Fiber",
+    "@react-three/drei",
+    "WebSockets",
+    "Server-authoritative physics",
+  ],
+  status: "Practice / demo — not a real-money product",
+  demo: "https://dicedemo.nvxthai.dev/",
+  link: {
+    label: "Live dashboard demo",
+    href: "https://diceadmindemo.nvxthai.dev/",
+  },
+};
+
 const PROJECT_GALLERY_OVERRIDES: Array<{
   matcher: RegExp;
   gallery: GalleryImage[];
@@ -295,7 +343,7 @@ export async function getSkills(): Promise<SkillGroup[]> {
 export async function getProjects(): Promise<Project[]> {
   return safe(async () => {
   const rows = await prisma.project.findMany({ orderBy: { order: "asc" } });
-  return rows.map((r) => ({
+  const projects = rows.map((r) => ({
     id: r.id,
     title: r.title,
     kind: r.kind as ProjectKind,
@@ -334,7 +382,9 @@ export async function getProjects(): Promise<Project[]> {
         : project,
     )
     .map(applyProjectGallery);
-  }, []);
+
+  return [AUTHORITATIVE_DICE_DEMO, ...projects];
+  }, [AUTHORITATIVE_DICE_DEMO]);
 }
 
 export async function getCareer(): Promise<CareerEntry[]> {

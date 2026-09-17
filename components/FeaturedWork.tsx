@@ -8,6 +8,7 @@ import type { Project } from "@/lib/content";
 const FEATURED_MATCHERS = [
   /richgn|richglobal/i,
   /ai-assisted crypto futures/i,
+  /authoritative dice game/i,
   /police alarm/i,
   /docflow/i,
   /football predictions/i,
@@ -38,7 +39,7 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
     <Section id="selected-work" kicker="Selected work" title="Different domains. The same standard of delivery.">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
         <p className="max-w-2xl text-[15px] leading-relaxed text-ink-soft">
-          A cross-section of the products I have taken from unclear requirements to working software: commerce, finance, public safety, data platforms, and enterprise operations.
+          A cross-section of the products I have taken from unclear requirements to working software: commerce, finance, public safety, realtime systems, data platforms, and enterprise operations.
         </p>
         <Link href="/projects" className="u-link shrink-0 text-sm">
           Browse all projects →
@@ -47,8 +48,10 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
 
       <div className="grid gap-4 lg:grid-cols-2">
         {featured.map((project, index) => {
-          const externalHref = project.demo ?? project.link?.href;
-          const externalLabel = project.demo ? "Live demo" : project.link?.label;
+          const externalLinks = [
+            project.demo ? { href: project.demo, label: "Live demo" } : undefined,
+            project.link ? { href: project.link.href, label: project.link.label } : undefined,
+          ].filter((link): link is { href: string; label: string } => Boolean(link));
           const gallery = project.gallery?.length
             ? project.gallery
             : project.image
@@ -95,16 +98,17 @@ export default function FeaturedWork({ projects }: { projects: Project[] }) {
                   <Link href="/projects" className="u-link">
                     Read the case study →
                   </Link>
-                  {externalHref && externalLabel && (
+                  {externalLinks.map((link) => (
                     <a
-                      href={externalHref}
+                      key={link.href}
+                      href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-ink-soft transition-colors hover:text-ink"
                     >
-                      {externalLabel} ↗
+                      {link.label} ↗
                     </a>
-                  )}
+                  ))}
                 </div>
               </article>
             </Reveal>
