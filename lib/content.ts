@@ -66,6 +66,7 @@ export type CareerEntry = {
   period: string;
   location: string;
   points: string[];
+  order: number;
 };
 export type Education = { id: number; school: string; detail: string };
 export type Language = { id: number; name: string; level: string };
@@ -425,6 +426,7 @@ export async function getCareer(): Promise<CareerEntry[]> {
       period: r.period,
       location: r.location,
       points: asStrings(r.points),
+      order: r.order,
     }));
   }, []);
 }

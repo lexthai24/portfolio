@@ -34,7 +34,7 @@ async function guard() {
 }
 
 function revalidateSite() {
-  for (const p of ["/", "/about", "/work", "/projects", "/admin"]) {
+  for (const p of ["/", "/about", "/work", "/projects", "/admin", "/admin/career"]) {
     revalidatePath(p);
   }
 }
@@ -222,6 +222,48 @@ export async function deleteCareer(
 ): Promise<ActionState> {
   return runDelete("Job", async () => {
     await prisma.careerEntry.delete({ where: { id: int(formData, "id") } });
+  });
+}
+
+export async function reorderCareer(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  return run("Career order", async () => {
+    const serializedIds = str(formData, "careerIds");
+    let careerIds: unknown;
+
+    try {
+      careerIds = JSON.parse(serializedIds);
+    } catch {
+      throw new Error("The submitted career order is invalid.");
+    }
+
+    if (
+      !Array.isArray(careerIds) ||
+      careerIds.some((id) => !Number.isInteger(id) || id <= 0) ||
+      new Set(careerIds).size !== careerIds.length
+    ) {
+      throw new Error("The submitted career order is invalid.");
+    }
+
+    const entries = await prisma.careerEntry.findMany({
+      select: { id: true },
+    });
+    const existingIds = new Set(entries.map((entry) => entry.id));
+
+    if (
+      existingIds.size !== careerIds.length ||
+      careerIds.some((id) => !existingIds.has(id))
+    ) {
+      throw new Error("Career entries changed. Refresh the page and try again.");
+    }
+
+    await prisma.$transaction(
+      careerIds.map((id, order) =>
+        prisma.careerEntry.update({ where: { id }, data: { order } }),
+      ),
+    );
   });
 }
 
