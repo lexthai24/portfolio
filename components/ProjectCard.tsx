@@ -98,7 +98,7 @@ export default function ProjectCard({ p }: { p: Project }) {
         <div className="mt-7">
           <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-ink-dim">
             <span className="h-px w-3 bg-accent/50" />
-            The interesting parts
+            What made it hard
           </p>
           <ul className="mt-2.5 max-w-xl space-y-2.5">
             {p.challenges.map((c) => {
@@ -131,7 +131,7 @@ export default function ProjectCard({ p }: { p: Project }) {
         <div className="mt-7 rounded-xl border border-accent/20 bg-accent/[0.04] p-4 sm:p-5">
           <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-accent">
             <span className="h-px w-3 bg-accent/70" />
-            Senior / Staff engineering notes
+            How I handled the hard parts
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {p.engineeringNotes.map((note) => (
