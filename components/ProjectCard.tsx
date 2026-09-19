@@ -127,6 +127,27 @@ export default function ProjectCard({ p }: { p: Project }) {
         </div>
       )}
 
+      {p.engineeringNotes && p.engineeringNotes.length > 0 && (
+        <div className="mt-7 rounded-xl border border-accent/20 bg-accent/[0.04] p-4 sm:p-5">
+          <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-accent">
+            <span className="h-px w-3 bg-accent/70" />
+            Senior / Staff engineering notes
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {p.engineeringNotes.map((note) => (
+              <div key={note.label}>
+                <p className="font-mono text-[11px] uppercase tracking-wider text-ink-dim">
+                  {note.label}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                  {note.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {p.highlights && p.highlights.length > 0 && (
         <div className="mt-7">
           <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-ink-dim">

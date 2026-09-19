@@ -1,5 +1,6 @@
 import "server-only";
 import { prisma } from "./prisma";
+import { applyEngineeringNotes } from "./engineering-notes";
 
 // ─── Shapes consumed by the components (unchanged from the old lib/data.ts) ───
 
@@ -18,6 +19,7 @@ export type Project = {
   approach: string;
   outcome: string;
   challenges?: string[];
+  engineeringNotes?: Array<{ label: string; detail: string }>;
   highlights?: string[];
   stack: string[];
   status?: string;
@@ -412,7 +414,7 @@ export async function getProjects(): Promise<Project[]> {
     )
     .map(applyProjectGallery);
 
-  return [AUTHORITATIVE_DICE_DEMO, ...projects];
+  return [AUTHORITATIVE_DICE_DEMO, ...projects].map(applyEngineeringNotes);
   }, [AUTHORITATIVE_DICE_DEMO]);
 }
 

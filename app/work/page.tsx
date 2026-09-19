@@ -27,7 +27,7 @@ export default async function WorkPage() {
           kinds={["Client project"]}
           kicker="Work"
           title="Client work"
-          intro="Contract and client projects from the last few years, built alongside the day job. Most of it is under NDA, so you won't find names or source here. What I can share is the problem, how I went at it, and what came out the other end."
+          intro="Contract and client projects from the last few years, built alongside the day job. Most of it is under NDA, so you won't find names or source here. Each case study covers the problem, the senior-level engineering trade-offs, delivery constraints, and what came out the other end."
         />
         <Contact profile={profile} />
       </main>
