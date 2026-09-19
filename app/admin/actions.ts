@@ -34,7 +34,7 @@ async function guard() {
 }
 
 function revalidateSite() {
-  for (const p of ["/", "/about", "/work", "/projects", "/admin", "/admin/career"]) {
+  for (const p of ["/", "/work", "/projects", "/admin", "/admin/career"]) {
     revalidatePath(p);
   }
 }

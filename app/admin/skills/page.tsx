@@ -11,7 +11,7 @@ export default async function SkillsAdmin() {
     <div>
       <PageHeader
         title="Skills"
-        subtitle="Each group shows on the About page as a labelled row."
+        subtitle="Manage the skill groups used in the private profile data."
       />
       <div className="space-y-4">
         {skills.map((s) => (
